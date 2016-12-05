@@ -1,0 +1,25 @@
+deptno	departmentname	managerfirstname	managerlastname	totalemp	ctc
+d001	Marketing	Margareta	Markovitch	3577	254822716
+d001	Marketing	Vishwani	Minakawa	89000	6176532251
+d002	Finance	Ebru	Alpin	1936	139425108
+d002	Finance	Isamu	Legleitner	87713	5869783938
+d003	Human Resources	Shirish	Ossenbruggen	3924	215490252
+d003	Human Resources	Karsten	Sigstam	62499	3284696486
+d004	Production	Krassimir	Wegerle	3880	233740940
+d004	Production	Rosine	Cools	5009	287218267
+d004	Production	Shem	Kieras	5799	315546834
+d004	Production	Oscar	Ghazalie	101424	5515747759
+d005	Development	DeForest	Hagimont	21108	1247859182
+d005	Development	Leon	DasSarma	288885	15943625814
+d006	Quality Management	Peternela	Onuegbe	1390	78277129
+d006	Quality Management	Rutger	Hofmeyr	429	23278932
+d006	Quality Management	Sanjoy	Quadeer	813	44285961
+d006	Quality Management	Dung	Pesch	54224	2929079316
+d007	Sales	Przemyslawa	Kaelbling	8606	700979105
+d007	Sales	Hauke	Zhang	216598	16623850458
+d008	Research	Arie	Staelin	3375	203778964
+d008	Research	Hilary	Kambil	101361	5767099117
+d009	Customer Service	Tonny	Butterworth	1002	55041162
+d009	Customer Service	Marjo	Giarratana	1301	70844423
+d009	Customer Service	Xiaobin	Spinelli	1310	71614900
+d009	Customer Service	Yuchang	Weedman	58771	3572118783

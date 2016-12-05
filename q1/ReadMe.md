@@ -1,0 +1,68 @@
+I have used the Hive tool for this question i.e Q1 in the test.
+
+First using the sqoop I have dumped the database to hdfs.
+
+Then later I created individual tables in hive using the hive sql.
+
+I(Maaz) have used Vishwa's machine to execute the following code, therefore the username is displayed as vishwa.
+
+Case :
+Calculate average the salary of each 'Senior' employee. Please upload the final CSV along with the code and jar files(if any) to your github and provide the link below. The CSV should be formatted as empid, Name, Designation, Avg_salary
+
+SQOOP
+GET all data from MySql and Store it in HDFS
+
+PIG
+1. employees => CREATE EXTERNAL TABLE IF NOT EXISTS employees(eid int, birth_date String, first_name String, last_name String, gender String, hire_date String) COMMENT 'Employees details' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' STORED AS TEXTFILE;
+2. employees = LOAD DATA INPATH 'hdfs:/user/maaz/sqoop/employees/part-m-00000' OVERWRITE INTO TABLE employees;
+3. titles => CREATE EXTERNAL TABLE IF NOT EXISTS titles (eid int, title String, from_date String, to_date String) COMMENT 'Employeed designation details' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' STORED AS TEXTFILE;
+4. titles => LOAD DATA INPATH 'hdfs:/user/maaz/sqoop/titles/part-m-00000' OVERWRITE INTO TABLE titles;
+5. salaries => CREATE EXTERNAL TABLE IF NOT EXISTS salaries (eid int, salary String, from_date String, to_date String) COMMENT 'Employeed salary details' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' STORED AS TEXTFILE;
+6. titles => LOAD DATA INPATH 'hdfs:/user/maaz/sqoop/salaries/part-m-00000' OVERWRITE INTO TABLE salaries;
+
+7. hive -e 'set hive.cli.print.header=true; SELECT e.eid as emp_no,first_name,last_name,t.title as designation,avg(s.salary) as avg_salary FROM employees e JOIN salaries s ON (s.eid = e.eid) JOIN titles t ON (t.eid = e.eid) WHERE t.title LIKE "Senior%" GROUP BY e.eid,t.title,first_name,last_name' > /home/vishwa/Desktop/Q1_Ans.csv;
+
+
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/local/hive/lib/log4j-slf4j-impl-2.4.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/local/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+
+Logging initialized using configuration in jar:file:/usr/local/hive/lib/hive-common-2.1.0.jar!/hive-log4j2.properties Async: true
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. tez, spark) or using Hive 1.X releases.
+Query ID = vishwa_20161206010603_f183460e-ddf5-4b7a-b338-ce903b805877
+Total jobs = 2
+Stage-1 is selected by condition resolver.
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2016-12-06 01:06:07,444 Stage-1 map = 0%,  reduce = 0%
+2016-12-06 01:06:13,460 Stage-1 map = 22%,  reduce = 0%
+2016-12-06 01:06:15,470 Stage-1 map = 100%,  reduce = 0%
+2016-12-06 01:06:23,604 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1972012264_0001
+Launching Job 2 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2016-12-06 01:06:24,874 Stage-2 map = 0%,  reduce = 0%
+2016-12-06 01:06:25,878 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local1657014463_0002
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 475923838 HDFS Write: 0 SUCCESS
+Stage-Stage-2:  HDFS Read: 260643100 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+Time taken: 22.344 seconds, Fetched: 190603 row(s)
